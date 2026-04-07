@@ -1,0 +1,106 @@
+<!-- WU Shaowei, PROG2005 A2 Part 2 -->
+<section>
+  <h2>Manage Goods</h2>
+
+  <div class="stats">
+    <div class="stat">Total Goods Number: <span>{{ totalItems }}</span></div>
+    <div class="stat">Total Goods Value: $<span>{{ totalValue.toFixed(2) }}</span></div>
+    <div class="stat">Low or No Inventory: <span>{{ lowOrOutCount }}</span></div>
+  </div>
+
+  <section class="message" *ngIf="uiMessage" [class.error]="uiMessageIsError">{{ uiMessage }}</section>
+
+  <section class="card">
+    <h3>Goods Information</h3>
+    <div class="form-grid">
+      <label>Goods ID *<input type="text" [(ngModel)]="formItem.id" name="id" /></label>
+      <label>Goods Name *<input type="text" [(ngModel)]="formItem.name" name="name" /></label>
+
+      <label>Goods Category *
+        <select [(ngModel)]="formItem.category" name="category">
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </label>
+
+      <label>Quantity *<input type="number" min="0" [(ngModel)]="formItem.quantity" name="quantity" /></label>
+      <label>Price *<input type="number" min="0" step="0.01" [(ngModel)]="formItem.price" name="price" /></label>
+      <label>Supplier Name *<input type="text" [(ngModel)]="formItem.supplier" name="supplier" /></label>
+
+      <label>Inventory status *
+        <select [(ngModel)]="formItem.stockStatus" name="stockStatus">
+          <option *ngFor="let stock of stockStatuses" [value]="stock">{{ stock }}</option>
+        </select>
+      </label>
+
+      <label>Popular *
+        <select [(ngModel)]="formItem.popular" name="popular">
+          <option *ngFor="let p of popularValues" [value]="p">{{ p }}</option>
+        </select>
+      </label>
+
+      <label>Remark<input type="text" [(ngModel)]="formItem.comment" name="comment" /></label>
+    </div>
+
+    <div class="row">
+      <button (click)="addItem()">Add Goods</button>
+      <button (click)="updateByName()">Update by Goods Name</button>
+      <button class="danger" (click)="deleteByName()">Delete by Goods Name</button>
+      <button class="ghost" (click)="clearForm()">Clear Input</button>
+    </div>
+  </section>
+
+  <section class="toolbar card">
+    <div class="row">
+      <input type="text" placeholder="Search by goods name" [(ngModel)]="searchInput" name="searchInput" />
+      <button (click)="searchByName()">Search Goods</button>
+      <button class="ghost" (click)="showAll()">Reset Condition</button>
+      <button class="ghost" (click)="showAll()">Show All Goods</button>
+      <button class="ghost" (click)="showPopularOnly()">Only Popular Goods</button>
+      <button class="danger" (click)="deleteSelected()">Delete Selected Goods</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>{{ tableTitle }}</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($any($event.target).checked)" /></th>
+            <th>ID</th>
+            <th>Goods Name</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Supplier</th>
+            <th>Inventory</th>
+            <th>Popular</th>
+            <th>Remark</th>
+            <th>Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredItems">
+            <td><input type="checkbox" [checked]="isSelected(item.id)" (change)="toggleOne(item.id, $any($event.target).checked)" /></td>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price.toFixed(2) }}</td>
+            <td>{{ item.supplier }}</td>
+            <td [class.stock-low]="item.stockStatus === 'Low Stock'" [class.stock-out]="item.stockStatus === 'Out of Stock'">{{ item.stockStatus }}</td>
+            <td>{{ item.popular }}</td>
+            <td>{{ item.comment || '-' }}</td>
+            <td class="action-cell">
+              <button class="ghost" (click)="editItem(item)">Edit</button>
+              <button class="danger" (click)="deleteItemRow(item)">Delete</button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredItems.length === 0">
+            <td colspan="11">No goods found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

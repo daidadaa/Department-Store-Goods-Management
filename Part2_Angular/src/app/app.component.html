@@ -1,0 +1,19 @@
+<!-- WU Shaowei, PROG2005 A2 Part 2 -->
+<div class="app-shell">
+  <header class="topbar">
+    <h1>{{ appName }}</h1>
+    <p>{{ appSubtitle }}</p>
+  </header>
+
+  <nav class="nav">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home Page</a>
+    <a routerLink="/manage" routerLinkActive="active">Manage Goods</a>
+    <a routerLink="/search" routerLinkActive="active">Search Goods</a>
+    <a routerLink="/privacy-security" routerLinkActive="active">Privacy Security</a>
+    <a routerLink="/help" routerLinkActive="active">Help Center</a>
+  </nav>
+
+  <main class="page-wrap">
+    <router-outlet></router-outlet>
+  </main>
+</div>
