@@ -1,0 +1,11 @@
+1. Generative AI tools used
+- ChatGPT (OpenAI) – Version 4
+
+2. Purpose of Generative AI Use (Level 2 - Allowed)
+
+Generative AI is mainly used to assist me in conceptualizing page layouts and determining the functions that should be included in a web page (such as tables, menus, buttons, etc.), and the final version is not the same as AI. Additionally, when there are errors or bugs, I use AI to help explain the cause of the error, allowing me to modify and fix the code myself. AI is also used to optimize code comments. No full code or project templates were generated using AI, all implementation was done by myself.
+
+3. Scope of use of generative AI
+
+A small part of this project is assisted by AI, mainly in terms of idea and structure. The page layout and functional design were implemented by myself after referring to AI suggestions, and the bug fixes were completed with AI-based explanations. No AI-generated templates or full project code are used, all code is written or modified independently after understanding by the individual.
+
