@@ -1,7 +1,0 @@
-// WU Shaowei, PROG2005 A2 Part 2
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err: unknown) => console.error(err));
